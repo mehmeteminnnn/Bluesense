@@ -42,10 +42,21 @@
 - `.github/workflows/ci-cd.yml` ile otomatik build, test ve docker image pipeline'ı hazır.
 - Testler: xUnit ile unit ve integration testler.
 
-## Deployment
+## Yayınlama (Deployment)  Adımları
 
-- **Docker**
-  - `docker-compose up --build` ile tüm servisler ayağa kalkar.
+- Projeyi bir sunucuya veya kendi bilgisayarınıza kopyalayın.
+- Ortam değişkenlerini (veritabanı, redis, jwt secret) ayarlayın.
+- `docker-compose up --build` komutunu çalıştırın, hepsi otomatik başlar.
+- Veritabanı şeması için EF Core migration komutlarını kullanabilirsiniz.
+
+## Varsayımlar ve Tercih Gerekçeleri 
+
+- Katmanlı mimari (Onion) ile kodun bakımı ve testleri kolay olsun istedik.
+- Mesajlar ve kullanıcılar için PostgreSQL, hızlı erişim için Redis kullandım.
+- Güvenli oturum için JWT ve refresh token tercih edildi.
+- Gerçek zamanlı chat için SignalR seçildi.
+- Dosya yükleme örneği basit tutuldu, gerçek ortamda bulut servis önerilir.
+- Test ve CI/CD altyapısı hazır, detaylar geliştirilebilir.
 
 ## Mimari
 
