@@ -58,6 +58,6 @@
   - Kullanıcı, grup, mesaj meta verisi: PostgreSQL
   - Hızlı mesaj erişimi/cache: Redis
 
-## Katkı & İletişim
+## İletişim
 
 -Mehmet Emin Tok mhmtmntok@gmail.com 05342119155
