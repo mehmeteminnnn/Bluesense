@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: bluesense
+      POSTGRES_PASSWORD: bluesense_pw
+      POSTGRES_DB: bluesense_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - bluesense-net
+
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - bluesense-net
+
+  api:
+    build:
+      context: .
+      dockerfile: Bluesense/Dockerfile
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=bluesense_db;Username=bluesense;Password=bluesense_pw
+      ConnectionStrings__Redis: redis:6379
+    ports:
+      - "5000:8080"
+    networks:
+      - bluesense-net
+
+volumes:
+  pgdata:
+
+networks:
+  bluesense-net:
+    driver: bridge
